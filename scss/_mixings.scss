@@ -1,0 +1,84 @@
+/******************** webkit */
+
+@mixin box-shadow-item {
+    -webkit-box-shadow: 0px 12px 25px 0px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0px 12px 25px 0px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 12px 25px 0px rgba(0, 0, 0, 0.2);
+}
+
+@mixin grad-lf-to-rg {
+	background-image: linear-gradient(to left, $sd_color, $ft_color);
+}
+@mixin cover() {
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-ms-background-size: cover;
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+@mixin appearance() {
+	-moz-appearance: none;
+	-o-appearance: none;
+	-ms-appearance: none;
+	-webkit-appearance: none;
+}
+@mixin animation($time) {
+	-webkit-transition: all $time ease-out;
+	-moz-transition: all $time ease-out;
+	-ms-transition: all $time ease-out;
+	-o-transition: all $time ease-out;
+	transition: all $time ease-out;
+}
+
+@mixin flex-ctr() {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+@mixin flex-start() {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: flex-start;
+	-ms-flex-pack: flex-start;
+	justify-content: flex-start;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+@mixin flex-end() {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: flex-end;
+	-ms-flex-pack: flex-end;
+	justify-content: flex-end;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+@mixin rotate-item($deg) {
+	-o-transition: rotate($deg);
+	-moz-transition: rotate($deg);
+	-ms-transform: rotate($deg);
+	-webkit-transform: rotate($deg);
+	transform: rotate($deg);
+}
+
+@mixin panel-shadow {
+	-webkit-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
+}
+
+@mixin blk-shadow {
+	-webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+}

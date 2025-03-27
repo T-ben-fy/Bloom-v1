@@ -1,0 +1,472 @@
+@import "../scss/variables";
+@import "../scss/mixings";
+
+*{transition: all .3s ease;}
+
+@mixin bl-btn--main-styles(){
+	padding: calc(12rem/16);
+	border-radius: calc(8rem/16);
+	font-size: calc(14rem/16);
+	font-weight: 500;
+	border: 2px solid transparent;
+    opacity: .95;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: .5rem;
+
+    svg path{fill: currentColor}
+    &:hover{box-shadow: $box-shadow-3}
+
+}
+
+.bl-btn{
+    @include bl-btn--main-styles();
+
+    &--lg{min-width: 225px;}
+    &--md{min-width: 108px;}
+    &--sm{min-width: 40px;}
+
+    &--primary{
+        background: $primary;
+        color: white;
+        &.bl-btn--light{
+            color: $primary;
+            background: $white;
+        }
+        &.bl-btn--transparent{background: transparent;color: $primary;}
+        &.bl--br-2{border-color: currentColor}
+    }
+}
+
+$backlogs__colors:(
+    black  : $gray-6,
+    orange : $warning,
+    gray   : $txt_dark_clr,
+    primary : $primary,
+    blue   : #005BBF,
+    yellow : #FFC221,
+    success  : $success,
+    danger  : $danger
+);
+
+@mixin bl-backlog(){
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    margin: .5rem;
+}
+
+.bl-backlog{
+    @include bl-backlog();
+
+    &__span {
+        font-size: calc(13rem/16);
+        line-height: calc(15.5rem/16);
+        font-weight: 600;
+        padding: calc(5rem/16);
+        border-radius: calc(11rem/16);
+        max-width: 155px;
+        text-align: center;
+        &:hover{box-shadow: $box-shadow-3}
+    }
+    svg {
+        cursor: pointer;
+        // &:hover{animation: t-animation .6s ease;}
+    }
+    $backlogs__colors__keys : map-keys($backlogs__colors);
+    @each $c in $backlogs__colors__keys {
+        &--#{$c}{
+            $selected__color : map-get($backlogs__colors,$c);
+            color: $selected__color;
+            .bl-backlog__span{
+                background-color: rgba($selected__color, 0.1);
+            }
+            .bl-backlog__btn{
+                border: none;
+            }
+        }
+    }
+}
+
+@mixin bl-tag(){
+    font-size: calc(10rem/16);
+    padding: calc(3rem/16);
+    border-radius: calc(5rem/16);
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: calc(4rem/16);
+    opacity: .9;
+    cursor: pointer;
+
+    &:hover{opacity: 1;box-shadow: $box-shadow-3;}
+    svg{max-width: calc(10rem/16);}
+    svg path{fill: currentColor;}
+}
+.bl-tag{
+    @include bl-tag();
+    $backlogs__colors__keys : map-keys($backlogs__colors);
+    @each $c in $backlogs__colors__keys {
+        &--#{$c}{
+            
+            $selected__color : map-get($backlogs__colors,$c);
+            color: $selected__color;
+            background-color: rgba($selected__color, 0.1);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Variables for color and styling
+$primary-color: $primary;
+$secondary-color: #ffffff;
+$hover-color: rgba(0, 0, 0, 0.1);
+$border-color: #ccc;
+$focus-border-color: $primary;
+$text-color: $primary;
+$disabled-bg-color: #f5f5f5;
+
+@mixin input-focus {
+  border-color: $focus-border-color;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba($primary-color, 0.3);
+}
+
+.bl-select {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  
+  &__title{
+    font-size: calc(12rem/16);
+    color: $gray-4;
+    font-weight: 700;
+    padding: calc(8rem/16) 0;
+  }
+
+  &__select {
+    box-shadow: 0 0 4px rgba($gray-5, $alpha: .26) inset;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-size: calc(14rem/16);
+    font-family: inherit;
+    color: $gray-4;
+    background-color: $white;
+    width: 100%;
+    border: 1px solid $gray-3;
+    padding: calc(12rem / 16) 3rem calc(12rem / 16) calc(12rem / 16);
+    border-radius: .6rem;
+    background-image: url("data:image/svg+xml;utf8,<svg height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M10,0A10,10,0,1,1,0,10,10.011,10.011,0,0,1,10,0Zm0,1.5A8.5,8.5,0,1,0,18.5,10,8.51,8.51,0,0,0,10,1.5Zm4,6.526a.751.751,0,0,1,0,1.061l-3.472,3.486a.743.743,0,0,1-.413.212L10,12.794a.746.746,0,0,1-.531-.221L6,9.087A.75.75,0,0,1,7.061,8.028L10,10.982l2.94-2.954A.75.75,0,0,1,14,8.026Z' fill='darkgray' fill-rule='evenodd'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 96%;
+    background-position-y: 55%;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s ease-in-out;
+
+    &:focus {
+      @include input-focus;
+    }
+
+    &:disabled {
+      background-color: $disabled-bg-color;
+      cursor: not-allowed;
+    }
+
+    &::after {
+      content: '▼';
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: $text-color;
+      pointer-events: none;
+    }
+  }
+
+  // Dropdown menu styling
+  &__dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: $secondary-color;
+    border: 1px solid $border-color;
+    border-radius: 0 0 .6rem .6rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    
+    &.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    // Individual option styling
+    .dropdown-item {
+      padding: 2rem !important;
+      height: 40px;
+      font-size: 16px;
+      color: $text-color;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: $hover-color;
+      }
+
+      &:disabled {
+        color: $disabled-bg-color;
+        cursor: not-allowed;
+      }
+
+      &.selected {
+        background-color: $primary-color;
+        color: $secondary-color;
+      }
+    }
+  }
+}
+
+
+.bl-collapse{
+    border-radius: .8rem;
+    height: 16px;
+    padding-left: 2px;
+    width: fit-content;
+    display: inline-flex;
+    gap: .4rem;
+    &__switch { 
+
+        box-shadow: $box-shadow-2;
+        display: inline-flex;
+        align-items: center;
+        align-content: center;
+        flex-wrap: wrap;
+        width: 32px;
+        border-radius: calc(12rem/16);
+        padding: 0 3px;
+        cursor: pointer;
+
+        &__circle {
+            background:$white;
+            border-radius: 50%;
+            width: 12px;
+            height: 11px;
+            display: block;
+        }
+    }
+    &__txt {
+        font-size: calc(10rem/16);
+        font-weight: bold;
+    }
+
+    &.off{
+        .bl-collapse__switch{
+            background-color: $gray-4;
+        }
+        .bl-collapse__txt{
+            color: $gray-4;
+        }
+    }
+
+    &.on{
+        .bl-collapse__switch{
+            background-color: $primary;
+        }
+        .bl-collapse__switch__circle {
+            transform : translateX(120%);
+        }
+        .bl-collapse__txt{
+            color: $primary;
+        }
+    }
+}
+
+
+.bl-card{
+    box-shadow: $box-shadow-2;
+    padding: calc(6rem / 16) calc(12rem / 16);
+    margin: 1rem;
+    max-width: 200px;
+    border-radius: calc(10rem/16);
+    background: $gray-1;
+    display: inline-flex;
+    flex-direction: column;
+
+    &[card-data='body+footer-hidden']{
+        .bl-card__body,.bl-card__footer{max-height: 0;overflow: hidden;}
+    }
+
+    &[card-data='body-hidden']{
+        .bl-card__body{max-height: 0;overflow: hidden;}
+    }
+
+    &__header{
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        &__title{
+            width: 74.8%;
+            &__label{
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: calc(5rem / 16);
+        }
+        &__input[type='radio']{height: 10px ; width : 10px ; border : 1px solid $c-rating-default};
+            span{color: $gray-5; font-size: calc(12rem/16);line-height: 1rem;font-weight: 600};
+        }
+        &__icons{
+            width: 22%;
+            svg{max-width: 16px;width: 100%;cursor: pointer;path{fill:$gray-4 ;&:hover{fill: $primary;}}}
+        }
+    }
+    ol{background: $gray-2; height: 2px;margin: calc(9rem/16) auto 0;width: 100%;}
+    &__body{
+        margin-top: .2rem;
+        &__label{    
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: space-between;
+            gap: calc(5rem / 16);
+            &__title{font-size: calc(10rem/16);line-height: calc(13rem/16);}
+            &__input[type='radio']{height: 10px ; width : 10px ; border : 1px solid $c-rating-default;accent-color: $primary;}
+        }
+    }
+    &__footer{
+        display: inline-flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 0.3rem;
+        &__checked-num{
+            display: inline-flex;
+            align-items: center;
+            line-height: 0;
+            gap: .25rem;
+            width: 90%;
+            color: $primary;
+            &__label{
+                display: inline-flex;
+                align-items: center;
+                gap: .2rem;
+            }
+            &__txt{
+                font-size: calc(10rem/16);
+                line-height: calc(12rem/16);
+            }
+        }
+        &__flag{
+            width: 10%;
+            line-height: 0;
+        }
+        &__owners{
+            width: 100%;
+            margin-top: .2rem;
+
+            &__title{
+                font-weight: 600;
+                font-size: calc(10rem/16);
+                color: $gray-4;
+            }
+            &__tags{
+                display: inline-flex;
+                gap: .3rem;
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+
+/* Customize the label (the container) */
+.bl-checkbox {
+
+    font-size: calc(10rem/16);
+    line-height: calc(10rem/16);
+    position: relative;
+    cursor: pointer;
+    font-size: 0.625rem;
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 12px;
+    width: 12px;
+  /* Hide the browser's default checkbox */
+  &__input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    z-index: 1;
+  }
+  
+  /* Create a custom checkbox */
+  &__checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid $primary;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.15rem;
+    z-index: 0;
+    &:after {
+        content: "";
+        position: absolute;
+        display: none;
+        left: 4px;
+        top: 1px;
+        width: 3px;
+        height: 7px;
+        border: solid $primary;
+        border-width: 0 2px 2px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+  }
+  
+  /* Show the checkmark when checked */
+  &__input:checked ~ &__checkmark:after {
+    display: block;
+  }
+
+}
+
+
+@import "../node_modules/bootstrap/scss/bootstrap";

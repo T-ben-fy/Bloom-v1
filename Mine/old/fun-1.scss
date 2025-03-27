@@ -1,0 +1,79 @@
+$colors: (
+  blue: #635FF7,
+  white: #ffffff,
+  transparent: transparent
+);
+
+$sizes: (
+  lg: 1.25rem,
+  md: 1rem,
+  sm: 0.875rem
+);
+
+$border-styles: (
+  none: none,
+  solid: solid
+);
+
+@mixin button-styles($size, $color, $border-style) {
+
+  font-size: map-get($sizes, $size);
+  background-color: map-get($colors, $color);
+  border: if($border-style == 'none', none, (2px solid black));
+  padding: 0.5em 1em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  .icon {
+    margin-right: if($icon-position == 'left', 0.5em, unset);
+    margin-left: if($icon-position == 'right', 0.5em, unset);
+    
+        &:last-child {
+        margin-right: unset; // Remove right margin from last icon
+        }
+        
+        &:first-child {
+        margin-left: unset; // Remove left margin from first icon
+        }
+    }
+}
+
+.button {
+  
+  @for $i from (lg md sm) {
+    @each $color-name, $color-value in $colors {
+      @each $border-style in keys($border-styles) {
+        &--#{$i}--#{$color-name}--#{$border-style} {
+          @include button-styles($i, $color-name, $border-style);
+        }
+      }
+    }
+  }
+
+  &.icon-left { 
+    .icon { 
+      margin-right: 0.5em; 
+    } 
+  }
+
+  &.icon-right { 
+    .icon { 
+      margin-left: 0.5em; 
+    } 
+  }
+
+  &.icon-both { 
+    .icon { 
+      margin-right: 0.5em; 
+
+      &:last-child { 
+        margin-right: unset; // Remove right margin from last icon 
+      } 
+
+      &:first-child { 
+        margin-left: unset; // Remove left margin from first icon 
+      } 
+    } 
+  }
+}

@@ -1,0 +1,110 @@
+
+// Button Variants
+$padding-variants: (
+  sm: 4px 8px,
+  md: 8px 16px,
+  lg: 12px 24px,
+  xl: 16px 32px,
+  xxl: 20px 40px
+);
+
+$border-variants: (
+  no: none,
+  2p: 2px solid transparent
+);
+
+$border-radius-variants: (
+  no: 0,
+  sm: 4px,
+  md: 8px,
+  lg: 16px,
+  ro: 50%
+);
+
+$color-variants: (
+   pr: #007bff,
+   se: #000000,
+   su: #28a745,
+   da: #dc3545,
+   wa: #ffc107,
+   wh: #ffffff
+);
+
+$background-variants: (
+    bg-pr: #007bff,
+    bg-se: #000000,
+    bg-su: #28a745,
+    bg-da: #dc3545,
+    bg-wa: #ffc107,
+    bg-wh: #ffffff
+);
+
+// SVG Positioning
+$svg-position-variants: (
+    left, 
+    right, 
+    both
+);
+
+@mixin button-styles($padding, $border, $border-radius, $color, $background) {
+    padding: map-get($padding-variants, $padding);
+    border: map-get($border-variants, $border);
+    border-radius: map-get($border-radius-variants, $border-radius);
+    color: map-get($color-variants, $color);
+    background-color: map-get($background-variants, $background);
+    
+    // Additional styles for hover and focus states can be added here.
+}
+
+.button {
+    @for $i from sm through xxl {
+        &--#{$i} {
+            @include button-styles($i, thin, medium, primary, primary-bg); // Default values can be changed as needed.
+        }
+        
+        @each $border in keys($border-variants) {
+            &--#{$i}-#{$border} {
+                @include button-styles($i, $border, medium, primary, primary-bg);
+            }
+        }
+
+        @each $radius in keys($border-radius-variants) {
+            &--#{$i}-radius-#{$radius} {
+                @include button-styles($i, thin, $radius , primary , primary-bg);
+            }
+        }
+
+        @each $color in keys($color-variants) {
+            &--#{$i}-color-#{$color} {
+                @include button-styles($i , thin , medium , $color , primary-bg);
+            }
+        }
+
+        @each $bg in keys($background-variants) {
+            &--#{$i}-bg-#{$bg} {
+                @include button-styles($i , thin , medium , primary , $bg);
+            }
+        }
+    }
+
+    // SVG Positioning Classes
+    @each $position in $svg-position-variants {
+        &--icon-#{$position} {
+            svg {
+                position:absolute;
+                
+                // Adjust positioning based on state.
+                @if ($position == left) { 
+                    left :10px; 
+                } 
+                @else if ($position == right) { 
+                    right :10px; 
+                } 
+                @else if ($position == both) { 
+                    left :10px; 
+                    right :10px; 
+                }
+            }
+        }
+    }
+}

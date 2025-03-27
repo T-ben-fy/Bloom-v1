@@ -1,0 +1,49 @@
+@mixin bl-btn($color){
+    $colors__keys : map-keys($colors);
+    @each $i in $colors__keys {
+        &--#{$i}{
+            &-light{
+                &-lg{
+                    color: $color;
+                    background: $white;
+                    @include bl-btn--main-styles();
+                    min-width: 300px;
+                }
+                &-md{
+                    color: $color;
+                    background: $white;
+                    @include bl-btn--main-styles();
+                    min-width: 200px;
+                }
+                &-sm{
+                    color: $color;
+                    background: $white;
+                    @include bl-btn--main-styles();
+                    min-width: 100px;
+                }
+            }
+            &-dark{
+                &-lg{
+                    color:$white;
+                    background: $color;
+                    @include bl-btn--main-styles();
+                    min-width: 300px;
+                }
+                &-md{
+                    color:$white;
+                    background: $color;
+                    @include bl-btn--main-styles();
+                    min-width: 200px;
+                }
+                &-sm{
+                    color:$white;
+                    background: $color;
+                    @include bl-btn--main-styles();
+                    min-width: 100px;
+                }
+            }
+        }
+    }
+}
+
+.bl-btn{@include bl-btn($primary)}

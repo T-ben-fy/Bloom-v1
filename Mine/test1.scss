@@ -1,0 +1,142 @@
+// _buttons.scss
+
+// Base button styles
+$button-font-family: 'Arial', sans-serif;
+$button-transition: all 0.3s ease;
+
+$colors: (
+  primary: $primary,
+  secondary: $secondary,
+  success: #28a745,
+  danger: #dc3545,
+  warning: #ffc107,
+  info: #17a2b8,
+  light: #f8f9fa,
+  dark: #343a40
+);
+
+$sizes: (
+  small: 0.8rem,
+  medium: 1rem,
+  large: 1.2rem
+);
+
+$padding: (
+  small: 0.4rem 0.8rem,
+  medium: 0.6rem 1.2rem,
+  large: 0.8rem 1.5rem
+);
+
+$border-radius: 0.25rem;
+
+// Mixin to apply color styles
+@mixin button-color($color) {
+  background-color: map-get($colors, $color);
+  border-color: map-get($colors, $color);
+  color: white;
+  
+  &:hover {
+    background-color: darken(map-get($colors, $color), 10%);
+    border-color: darken(map-get($colors, $color), 10%);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  }
+
+  &:active {
+    background-color: darken(map-get($colors, $color), 20%);
+    border-color: darken(map-get($colors, $color), 20%);
+  }
+}
+
+// Mixin to apply size styles
+@mixin button-size($size) {
+  font-size: map-get($sizes, $size);
+  padding: map-get($padding, $size);
+}
+
+// Button Component
+.button {
+  display: inline-block;
+  font-family: $button-font-family;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: $border-radius;
+  transition: $button-transition;
+
+  &.small {
+    @include button-size(small);
+  }
+
+  &.medium {
+    @include button-size(medium);
+  }
+
+  &.large {
+    @include button-size(large);
+  }
+
+  // Add color variants
+  &.primary { @include button-color(primary); }
+  &.secondary { @include button-color(secondary); }
+  &.success { @include button-color(success); }
+  &.danger { @include button-color(danger); }
+  &.warning { @include button-color(warning); }
+  &.info { @include button-color(info); }
+  &.light { @include button-color(light); }
+  &.dark { @include button-color(dark); }
+
+  // Optional Background styles (gradient or solid)
+  &.bg-gradient {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    border: none;
+    color: white;
+  }
+
+  &.bg-transparent {
+    background: transparent;
+    border: 1px solid currentColor;
+    color: currentColor;
+    
+    &:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+}
+
+
+
+
+
+
+
+
+
+// <!-- Small Primary Button -->
+// <button class="button small primary">Primary Small Button</button>
+
+// <!-- Medium Secondary Button -->
+// <button class="button medium secondary">Secondary Medium Button</button>
+
+// <!-- Large Success Button -->
+// <button class="button large success">Success Large Button</button>
+
+// <!-- Button with Transparent Background -->
+// <button class="button medium bg-transparent">Transparent Button</button>
+
+// <!-- Button with Gradient Background -->
+// <button class="button large bg-gradient">Gradient Button</button>
+
+// <!-- Disabled Button -->
+// <button class="button medium danger" disabled>Disabled Danger Button</button>
+
