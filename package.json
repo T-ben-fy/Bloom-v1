@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build-css": "sass scss/custom.scss css/custom.css --watch",
+    "ysf-css": "sass scss/youssef.scss css/youssef.css --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

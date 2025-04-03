@@ -1,0 +1,50 @@
+@import "../scss/custom.scss";
+
+
+.bl-slide__slides , .bl-slide__boxs{
+    display: inline-flex;
+    gap: 1rem;
+    background: #eee;
+    padding: 1rem 2rem;
+}
+
+.bl-slide__boxs{
+    min-height: 80vh;
+    width: 100%;
+    position: relative;
+
+    &__box{
+        margin: auto;
+        min-height: 100%;
+        width: 100%;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        &.active{opacity: 1;}
+    }
+
+}
+
+.bl-search{
+    padding: calc(11rem / 16) 1rem;
+    border: 2px solid $gray-4;
+    background: $white;
+    border: 1px solid $gray-3;
+    box-shadow: inset 0px 0px 4px rgba(100, 114, 140, 0.24);
+    border-radius: calc(8rem/16);
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    min-width: calc(256rem/16);
+    overflow: hidden;
+
+    input{
+        font-size: calc(14rem/16);
+        background: transparent;
+        border: none;
+        outline: none;
+    }
+}
